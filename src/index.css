@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root{
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+
+html,
+body{
+   background-color: #2e2e2e;
+}
+
+#canvas-container{
+   z-index: -1;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 70%;
+}
+
+.shadow_button{
+   border: 1px solid grey;
+   transition: 0.5s;
+}
+
+.shadow_button:hover {
+   color: #ffffff;
+   background: #ea00ff;
+   border: 1px solid #ea00ff;
+   text-shadow:   0 0 5px #ffffff,
+                  0 0 10px #ffffff,
+                  0 0 20px #ffffff;
+   box-shadow: 0 0 5px #ea00ff,
+               0 0 20px #ea00ff,
+               0 0 50px #ea00ff,
+               0 0 100px #ea00ff;
+}
+
+.my_radio{
+   content: '';
+}
