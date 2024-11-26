@@ -5,40 +5,68 @@ import { useEffect, useState } from "react";
 
 export default function Creation() {
 
-   const store = useStore((state) => state)
+   const store = useStore(state => state)
 
    const parameters = [
       {
-         name: 'Strenght',
+         name: 'Strength',
          minText: 'Passive',
          maxText: 'Active',
-         min: 0.1,
-         max: 1.5,
+         value: store.uStrength,
+         min: store.uStrengthMin,
+         max: store.uStrengthMax,
+         count: 5,
          function: (value) => store.setStrength(value)
       },
       {
          name: 'Speed',
          minText: 'Calm',
          maxText: 'Impulsive',
-         min: 0.1,
-         max: 1.5,
+         value: store.uSpeed,
+         min: store.uSpeedMin,
+         max: store.uSpeedMax,
+         count: 5,
          function: (value) => store.setSpeed(value)
       },
       {
          name: 'HueColorIn',
          minText: 'Introvert',
          maxText: 'Extrovert',
-         min: 0,
-         max: 0.8,
-         function: (value) => store.setHueColorIn(value)
+         value: store.uColorBase,
+         min: store.uColorBaseMin,
+         max: store.uColorBaseMax,
+         count: 5,
+         function: (value) => store.setColorBase(value)
       },
       {
          name: 'HueColorOut',
          minText: 'A',
          maxText: 'B',
-         min: 0,
-         max: 0.8,
-         function: (value) => store.setHueColorOut(value)
+         value: store.uColorAccent,
+         min: store.uColorAccentMin,
+         max: store.uColorAccentMax,
+         count: 5,
+         function: (value) => store.setColorAccent(value)
+      },
+      {
+         name: 'Roughness',
+         minText: 'Liscio',
+         maxText: 'Ruvido',
+         value: store.uRoughness,
+         min: store.uRoughnessMin,
+         max: store.uRoughnessMax,
+         count: 3,
+         function: (value) => store.setRoughness(value)
+      },
+      {
+         name: 'Bloom',
+         minText: 'No',
+         maxText: 'Si',
+         value: store.uBloom,
+         min: store.uBloomMin,
+         max: store.uBloomMax,
+         count: 3,
+         function: (value) => store.setBloom(value)
       }
    ]
 
@@ -50,19 +78,9 @@ export default function Creation() {
    const [activeValue, setActiveValue] = useState(0)
 
    useEffect(() => {
-      const middleValue = (currentParameter.min + currentParameter.max) / 2
-      setActiveValue(middleValue)
-      
+      setActiveValue(currentParameter.value)
    }, [store.creationPhase])
 
-   const handleClick = () => {
-      if (store.creationPhase < parameters.length - 1) {
-         setKey(key => key + 1)
-         store.nextCreationPhase()
-      }
-      else
-         store.nextPhase()
-   }
 
    return <>
 
@@ -73,12 +91,13 @@ export default function Creation() {
          min={currentParameter.min}
          max={currentParameter.max}
          value={activeValue}
+         count={currentParameter.count}
          handleClick={(e) => {
             currentParameter.function(e.target.value)
             setActiveValue(e.target.value)
          }}
          key={key}
       />
-      <Button handleClick={handleClick} />
+      <Button />
    </>
 }

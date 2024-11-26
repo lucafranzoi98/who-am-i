@@ -1,9 +1,10 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Canvas } from '@react-three/fiber'
 import './index.css'
-import App from './Three/App.jsx'
-import Interface from './React/Interface.jsx'
+import Interface from "./React/Interface"
+import { Canvas } from '@react-three/fiber'
+import Experience from './Three/Experience.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -11,10 +12,8 @@ createRoot(document.getElementById('root')).render(
     <Interface />
 
     <div id="canvas-container">
-      <Canvas
-        shadows
-      >
-        <App />
+      <Canvas>
+        <Experience />
       </Canvas>
     </div>
 

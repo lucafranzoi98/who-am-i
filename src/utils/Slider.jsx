@@ -1,23 +1,23 @@
 import Radio from "./Radio"
 
-export default function Slider({ minText, maxText, min, max, handleClick, value }) {
+export default function Slider({ minText, maxText, min, max, count, handleClick, value }) {
 
-   const count = 5
    const step = (max - min) / (count - 1)
 
-   const texts = [
+   let texts = [
       minText,
       null,
       'Neutral',
       null,
       maxText
    ]
+   if (count == 3)
+      texts = texts.filter(val => val)
 
    const values = Array.from({ length: count }, (_, i) => {
       const value = min + (step * i)
       return Math.round(value * 100) / 100
    })
-
 
    return <>
       <div className="flex gap-10 my-8">

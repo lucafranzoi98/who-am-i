@@ -4,9 +4,10 @@ import Introduction from "./Introduction"
 import Result from "./Result"
 import StartScreen from "./StartScreen"
 import Container from "../utils/Container"
+import { useEffect } from "react"
 
 export default function Interface() {
-   const phase = useStore((state) => state.phase)
+   const { isFading, setFading, phase } = useStore()
 
    const components = [
       <StartScreen />,
@@ -15,10 +16,20 @@ export default function Interface() {
       <Result />
    ]
 
-   return <>
-      <Container isCentered={phase == 0}>
+   useEffect(() => {
+      if (phase == 0) {
+         setFading(true)
+         setTimeout(() => {
+            setFading(false)
+         }, 1000)
+      }
+   }, [phase])
+
+   return <div className={`fade ${isFading ? 'fade-out' : 'fade.in'}`}>
+
+      <Container>
          {components[phase]}
       </Container>
 
-   </>
+   </div>
 }
