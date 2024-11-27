@@ -11,8 +11,15 @@ export default function Slider({ minText, maxText, min, max, count, handleClick,
       null,
       maxText
    ]
-   if (count == 3)
+
+   let sliderStyle = 'h-1 bg-neutral-500 absolute bottom-2 -z-10 '
+
+   if (count == 3) {
       texts = texts.filter(val => val)
+      sliderStyle += 'w-40'
+   } else {
+      sliderStyle += 'w-80'
+   }
 
    const values = Array.from({ length: count }, (_, i) => {
       const value = min + (step * i)
@@ -20,7 +27,8 @@ export default function Slider({ minText, maxText, min, max, count, handleClick,
    })
 
    return <>
-      <div className="flex gap-10 my-8">
+      <div className="flex w-full justify-center relative mb-10">
+         <div className={sliderStyle}></div>
          {values.map((val, index) =>
             <Radio
                handleClick={handleClick}

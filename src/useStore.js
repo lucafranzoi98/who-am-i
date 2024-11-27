@@ -5,10 +5,10 @@ const useStore = create((set, get) => ({
    nextPhase: () => set(state => ({ phase: state.phase + 1 })),
 
    isFading: true,
-   setFading: (value) => set({isFading: value}),
+   setFading: (value) => set({ isFading: value }),
 
    introPhase: 0,
-   maxIntroPhase: 3,
+   maxIntroPhase: 4,
    nextIntroPhase: () => set(state => ({ introPhase: state.introPhase + 1 })),
 
    creationPhase: 0,
@@ -29,19 +29,19 @@ const useStore = create((set, get) => ({
 
    // Color Base
    uColorBaseMin: 0.01,
-   uColorBaseMax: 0.8,
+   uColorBaseMax: 0.7,
    uColorBase: 0,
    setColorBase: (value) => set({ uColorBase: value }),
    uColorBaseLightness: 1.0,
-   setColorBaseLightness: (value) => set({uColorBaseLightness: value}),
-   
+   setColorBaseLightness: (value) => set({ uColorBaseLightness: value }),
+
    // Color Accent
-   uColorAccentMin: 0.1,
-   uColorAccentMax: 0.9,
+   uColorAccentMin: 0.06,
+   uColorAccentMax: 0.75,
    uColorAccent: 0,
    setColorAccent: (value) => set({ uColorAccent: value }),
    uColorAccentLightness: 1.0,
-   setColorAccentLightness: (value) => set({uColorAccentLightness: value}),
+   setColorAccentLightness: (value) => set({ uColorAccentLightness: value }),
 
    // Roughness
    uRoughnessMin: 0,
@@ -53,7 +53,7 @@ const useStore = create((set, get) => ({
    uBloomMin: 0,
    uBloomMax: 0.5,
    uBloom: 0,
-   setBloom: (value) => set({uBloom: value}),
+   setBloom: (value) => set({ uBloom: value }),
 
    restart: () => set({
       phase: 0,
@@ -67,7 +67,7 @@ const useStore = create((set, get) => ({
       uColorAccentLightness: 1.0,
       uRoughness: (0 + 0.7) / 2,
       uBloom: 0
-   }),   
+   }),
 
 }))
 

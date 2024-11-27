@@ -9,7 +9,6 @@ export default function Creation() {
 
    const parameters = [
       {
-         name: 'Strength',
          minText: 'Passive',
          maxText: 'Active',
          value: store.uStrength,
@@ -19,7 +18,6 @@ export default function Creation() {
          function: (value) => store.setStrength(value)
       },
       {
-         name: 'Speed',
          minText: 'Calm',
          maxText: 'Impulsive',
          value: store.uSpeed,
@@ -29,9 +27,8 @@ export default function Creation() {
          function: (value) => store.setSpeed(value)
       },
       {
-         name: 'HueColorIn',
-         minText: 'Introvert',
-         maxText: 'Extrovert',
+         minText: 'Extrovert',
+         maxText: 'Introvert',
          value: store.uColorBase,
          min: store.uColorBaseMin,
          max: store.uColorBaseMax,
@@ -39,9 +36,8 @@ export default function Creation() {
          function: (value) => store.setColorBase(value)
       },
       {
-         name: 'HueColorOut',
-         minText: 'A',
-         maxText: 'B',
+         minText: 'Positive',
+         maxText: 'Negative',
          value: store.uColorAccent,
          min: store.uColorAccentMin,
          max: store.uColorAccentMax,
@@ -49,9 +45,8 @@ export default function Creation() {
          function: (value) => store.setColorAccent(value)
       },
       {
-         name: 'Roughness',
-         minText: 'Liscio',
-         maxText: 'Ruvido',
+         minText: 'Obvious',
+         maxText: 'Mysterious',
          value: store.uRoughness,
          min: store.uRoughnessMin,
          max: store.uRoughnessMax,
@@ -59,9 +54,8 @@ export default function Creation() {
          function: (value) => store.setRoughness(value)
       },
       {
-         name: 'Bloom',
-         minText: 'No',
-         maxText: 'Si',
+         minText: 'Selfish',
+         maxText: 'Selfless',
          value: store.uBloom,
          min: store.uBloomMin,
          max: store.uBloomMax,
@@ -84,7 +78,6 @@ export default function Creation() {
 
    return <>
 
-      <p>{currentParameter.name}</p>
       <Slider
          minText={currentParameter.minText}
          maxText={currentParameter.maxText}

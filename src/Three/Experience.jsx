@@ -1,10 +1,11 @@
 import Sphere from './Sphere'
 import useStore from '../useStore'
-import { Environment } from '@react-three/drei'
+import { Environment, Float } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
+
 
 export default function Experience() {
   const { uBloom } = useStore()
@@ -20,6 +21,7 @@ export default function Experience() {
 
   return (
     <>
+      {/* <color args={['#1e1e1e']} attach='background' /> */}
 
       <Environment
         preset='warehouse'
@@ -38,7 +40,13 @@ export default function Experience() {
         />
       </EffectComposer>
 
-      <Sphere />
+      <Float
+        speed={2}
+        rotationIntensity={0.1}
+        floatingRange={[-0.1, 0.1]}
+      >
+        <Sphere />
+      </Float>
 
       {/* <Perf /> */}
     </>

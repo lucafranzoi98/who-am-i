@@ -89,6 +89,8 @@ export default function Sphere() {
 
    useFrame((_, delta) => {
 
+      sphere.current.rotation.y += delta * 0.1
+
       strengthCurrent.current += (uStrength - strengthCurrent.current) * delta * speedTransition
       material.current.uniforms.uStrength.value = strengthCurrent.current
 

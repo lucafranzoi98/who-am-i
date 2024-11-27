@@ -25,8 +25,8 @@ export default function Interface() {
       }
    }, [phase])
 
-   return <div className={`fade ${isFading ? 'fade-out' : 'fade.in'}`}>
-
+   return <div className={`fade ${isFading ? 'fade-out' : 'fade.in'}`} >
+      
       <Container>
          {components[phase]}
       </Container>
