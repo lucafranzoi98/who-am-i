@@ -7,7 +7,7 @@ import tailwindcss from 'tailwindcss'
 export default defineConfig({
   plugins: [react(), glsl()],
   // base: '/who-am-i/',
-  css: {
+  css: { 
     postcss: {
       plugins: [tailwindcss()],
     },
