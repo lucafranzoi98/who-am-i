@@ -16,9 +16,9 @@ export default function Slider({ minText, maxText, min, max, count, handleClick,
 
    if (count == 3) {
       texts = texts.filter(val => val)
-      sliderStyle += 'w-40'
+      sliderStyle += 'w-32 md:w-40'
    } else {
-      sliderStyle += 'w-80'
+      sliderStyle += 'w-60 md:w-80'
    }
 
    const values = Array.from({ length: count }, (_, i) => {

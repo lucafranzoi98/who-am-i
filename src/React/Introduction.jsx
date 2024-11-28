@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import useStore from "../useStore"
 import Button from "../utils/Button"
 
@@ -7,8 +8,8 @@ export default function Introduction() {
    const texts = [
       "I'm human. I'm complex. I'm unique.",
       'What if I could turn myself into a simple sphere?',
-      'Maybe a little bigger.',
-      'And obviously full of life.',
+      'Maybe a little bigger...',
+      '...and alive.',
       'Who am I?'
    ]
 
@@ -21,8 +22,8 @@ export default function Introduction() {
    ]
 
    return <>
-      <p className="text-neutral-100 mb-10 text-lg lg:text-2xl text-center">{texts[introPhase]}</p>
-      <Button>
+      <p className="text-neutral-100 mb-10 text-lg md:text-2xl text-center text-balance">{texts[introPhase]}</p>
+      <Button >
          {buttonTexts[introPhase]}
       </Button>
    </>

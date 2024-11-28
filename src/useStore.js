@@ -49,11 +49,11 @@ const useStore = create((set, get) => ({
    uRoughness: (0 + 0.7) / 2,
    setRoughness: (value) => set({ uRoughness: value }),
 
-   // Bloom
-   uBloomMin: 0,
-   uBloomMax: 0.5,
-   uBloom: 0,
-   setBloom: (value) => set({ uBloom: value }),
+   // Glow
+   uGlowMin: 0,
+   uGlowMax: 0.15,
+   uGlow: 0,
+   setGlow: (value) => set({ uGlow: value }),
 
    restart: () => set({
       phase: 0,
@@ -66,7 +66,7 @@ const useStore = create((set, get) => ({
       uColorAccent: 0,
       uColorAccentLightness: 1.0,
       uRoughness: (0 + 0.7) / 2,
-      uBloom: 0
+      uGlow: 0
    }),
 
 }))

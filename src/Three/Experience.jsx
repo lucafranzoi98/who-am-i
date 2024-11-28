@@ -3,7 +3,7 @@ import useStore from '../useStore'
 import { Environment, Float } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 
 
@@ -13,15 +13,16 @@ export default function Experience() {
 
   const bloomPass = useRef()
 
-  useFrame((_, delta) => {
-    bloomCurrent.current += (uBloom - bloomCurrent.current) * delta * 2
+  // useFrame((_, delta) => {
+  //   bloomCurrent.current += (uBloom - bloomCurrent.current) * delta * 2
 
-    bloomPass.current.intensity = bloomCurrent.current
-  })
+  //   bloomPass.current.intensity = bloomCurrent.current
+  // })
+
 
   return (
     <>
-      {/* <color args={['#1e1e1e']} attach='background' /> */}
+      {/* <color args={['#2e2e2e']} attach='background' /> */}
 
       <Environment
         preset='warehouse'
@@ -30,7 +31,7 @@ export default function Experience() {
 
       <ambientLight intensity={0.2} />
 
-      <EffectComposer>
+      {/* <EffectComposer>
         <Bloom
           ref={bloomPass}
           luminanceThreshold={0}
@@ -38,7 +39,7 @@ export default function Experience() {
           mipmapBlur
           radius={1}
         />
-      </EffectComposer>
+      </EffectComposer> */}
 
       <Float
         speed={2}

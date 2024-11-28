@@ -8,6 +8,7 @@ import gsap from 'gsap'
 import vertexShader from '../shaders/vertex.glsl'
 import fragmentShader from '../shaders/fragment.glsl'
 import useStore from '../useStore'
+import FakeGlowMaterial from './FakeGlowMaterial'
 
 let geometry = new THREE.SphereGeometry(2, 256, 256)
 geometry = mergeVertices(geometry)
@@ -17,7 +18,7 @@ export default function Sphere() {
    const material = useRef()
    const sphere = useRef()
 
-   const { uStrength, uSpeed, uColorBaseLightness, uColorBase, uColorAccentLightness, uColorAccent, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLightness, setColorAccentLightness } = useStore()
+   const { uStrength, uSpeed, uColorBaseLightness, uColorBase, uColorAccentLightness, uColorAccent, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLightness, setColorAccentLightness, uGlow } = useStore()
 
    const strengthCurrent = useRef(uStrength)
    const speedCurrent = useRef(uSpeed)
@@ -26,6 +27,9 @@ export default function Sphere() {
    const colorAccentLightnessCurrent = useRef(uColorAccentLightness)
    const colorAccentCurrent = useRef(uColorAccent)
    const roughnessCurrent = useRef(uRoughness)
+   const glowCurrent = useRef(uGlow)
+   const glowAdd = useRef()
+   const glowNormal = useRef()
 
    const speedTransition = 2
 
@@ -65,9 +69,9 @@ export default function Sphere() {
 
       if (introPhase == 2)
          gsap.to(sphere.current.scale, {
-            x: 0.75,
-            y: 0.75,
-            z: 0.75,
+            x: 0.6,
+            y: 0.6,
+            z: 0.6,
             duration: 2,
             ease: 'power2.inOut'
          })
@@ -114,6 +118,9 @@ export default function Sphere() {
       roughnessCurrent.current += (uRoughness - roughnessCurrent.current) * delta * speedTransition
       material.current.uniforms.uRoughness.value = roughnessCurrent.current
 
+      glowCurrent.current += (uGlow - glowCurrent.current) * delta * speedTransition
+      glowNormal.current.material.opacity = glowCurrent.current
+      glowAdd.current.material.opacity = glowCurrent.current
    })
 
    return <>
@@ -124,6 +131,8 @@ export default function Sphere() {
          geometry={geometry}
          scale={[0.02, 0.02, 0.02]}
          position-y={4.5}
+      // scale={[0.6, 0.6, 0.6]}
+      // position-y={1}
       >
          <CustomShaderMaterial
             ref={material}
@@ -140,6 +149,37 @@ export default function Sphere() {
                uColorAccentLightness: new THREE.Uniform(uColorAccentLightness),
                uRoughness: new THREE.Uniform(uRoughness)
             }}
+         />
+
+      </mesh>
+
+      <mesh
+         position-y={1}
+         ref={glowNormal}
+      >
+         <sphereGeometry args={[4]} />
+         <FakeGlowMaterial
+            falloff={0}
+            glowInternalRadius={28}
+            glowSharpness={0}
+            glowColor='#ffffff'
+            opacity={uGlow}
+            blending={THREE.NormalBlending}
+         />
+      </mesh>
+
+      <mesh
+         position-y={1}
+         ref={glowAdd}
+      >
+         <sphereGeometry args={[2]} />
+         <FakeGlowMaterial
+            falloff={0}
+            glowInternalRadius={8}
+            glowSharpness={1}
+            glowColor='#ffffff'
+            opacity={uGlow}
+            blending={THREE.AdditiveBlending}
          />
       </mesh>
 

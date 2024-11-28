@@ -56,25 +56,24 @@ export default function Creation() {
       {
          minText: 'Selfish',
          maxText: 'Selfless',
-         value: store.uBloom,
-         min: store.uBloomMin,
-         max: store.uBloomMax,
+         value: store.uGlow,
+         min: store.uGlowMin,
+         max: store.uGlowMax,
          count: 3,
-         function: (value) => store.setBloom(value)
+         function: (value) => store.setGlow(value)
       }
    ]
 
    const currentParameter = parameters[store.creationPhase]
 
    // To force the re-render of the slider
-   const [key, setKey] = useState(0)
+   const [sliderKey, setSliderKey] = useState(10)
 
    const [activeValue, setActiveValue] = useState(0)
 
    useEffect(() => {
       setActiveValue(currentParameter.value)
    }, [store.creationPhase])
-
 
    return <>
 
@@ -89,7 +88,7 @@ export default function Creation() {
             currentParameter.function(e.target.value)
             setActiveValue(e.target.value)
          }}
-         key={key}
+         key={sliderKey}
       />
       <Button />
    </>

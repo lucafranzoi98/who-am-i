@@ -13,8 +13,8 @@ body,
 }
 
 html,
-body{
-   background-color: #2e2e2e;
+body {
+   background-color: #1e1e1e;
    overscroll-behavior: none;
 }
 
@@ -27,18 +27,18 @@ body{
    height: 100%;
 }
 
-h1{
+h1 {
    font-family: "Audiowide", sans-serif;
 }
 
-p, label {
+p,
+label {
    font-family: "Nunito", sans-serif;
    font-weight: 300;
 }
 
 .btn {
    font-family: "Nunito", sans-serif;
-   color: #eeeeee;
    text-transform: uppercase;
    text-decoration: none;
    border: 1px solid #eeeeee;
@@ -52,11 +52,15 @@ p, label {
    overflow: hidden;
 }
 
-.btn:hover,
-.btn:focus,
-.btn.active {
+.btn.not-clicked{
+   color: #eeeeee;
+}
+
+.btn.clicked{
    color: #1e1e1e;
 }
+
+
 
 .btn::before {
    content: "";
@@ -70,12 +74,14 @@ p, label {
    transition: all 1s;
 }
 
-.btn:hover::before,
-.btn:focus::before,
-.btn.active::before {
+.btn.clicked::before,
+.btn:hover::before {
    width: 160%;
 }
 
+.btn.not-clicked::before{
+   width: 0%;
+}
 
 .fade {
    position: fixed;
@@ -95,6 +101,6 @@ p, label {
    opacity: 1;
 }
 
-.radio_shadow{
+.radio_shadow {
    box-shadow: 0 0 6px #eeeeee;
 }

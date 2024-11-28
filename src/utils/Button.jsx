@@ -1,7 +1,7 @@
 import { useState } from "react"
 import useStore from "../useStore"
 
-export default function Button({ children = 'Continue' }) {
+export default function Button({ children = 'Continue', id }) {
 
    const { phase, introPhase, maxIntroPhase, creationPhase, maxCreationPhase, nextPhase, nextIntroPhase, nextCreationPhase, isFading, setFading, restart } = useStore()
 
@@ -9,11 +9,12 @@ export default function Button({ children = 'Continue' }) {
 
    const handleClick = () => {
 
-      setFading(true)
       setIsClicked(true)
-      
+      setFading(true)
+
       setTimeout(() => {
          setIsClicked(false)
+
          if (phase == 1 && introPhase < maxIntroPhase)
             nextIntroPhase()
          else if (phase == 2 && creationPhase < maxCreationPhase)
@@ -27,14 +28,14 @@ export default function Button({ children = 'Continue' }) {
       setTimeout(() => {
 
          setFading(false)
-      }, 1500)
+      }, 1750)
    }
 
-   return <button
-      className={`btn ${isClicked && 'active'} text-lg md:text-xl lg:text-xl`}
+   return <div
+      className={`btn text-md text-center text-balance pointer-events-auto ${isClicked ? 'clicked' : 'not-clicked'}`}
       onClick={handleClick}
       disabled={isFading}
    >
       {children}
-   </button>
+   </div>
 }
