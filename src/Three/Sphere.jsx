@@ -18,14 +18,16 @@ export default function Sphere() {
    const material = useRef()
    const sphere = useRef()
 
-   const { uStrength, uSpeed, uColorBaseLightness, uColorBase, uColorAccentLightness, uColorAccent, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLightness, setColorAccentLightness, uGlow } = useStore()
+   const { uStrength, uSpeed, uColorBase, uColorBaseLight, uColorMiddle, uColorMiddleLight, uColorTop, uColorTopLight, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLight, setColorMiddleLight, setColorTopLight, uGlow } = useStore()
 
    const strengthCurrent = useRef(uStrength)
    const speedCurrent = useRef(uSpeed)
-   const colorBaseLightnessCurrent = useRef(uColorBaseLightness)
    const colorBaseCurrent = useRef(uColorBase)
-   const colorAccentLightnessCurrent = useRef(uColorAccentLightness)
-   const colorAccentCurrent = useRef(uColorAccent)
+   const colorBaseLightCurrent = useRef(uColorBaseLight)
+   const colorMiddleCurrent = useRef(uColorMiddle)
+   const colorMiddleLightCurrent = useRef(uColorMiddleLight)
+   const colorTopCurrent = useRef(uColorTop)
+   const colorTopLightCurrent = useRef(uColorTopLight)
    const roughnessCurrent = useRef(uRoughness)
    const glowCurrent = useRef(uGlow)
    const glowAdd = useRef()
@@ -83,41 +85,56 @@ export default function Sphere() {
 
    useEffect(() => {
 
-      if (creationPhase == 2 && uColorBase !== 0)
-         setColorBaseLightness(0.5)
+      if (creationPhase == 2 && uColorBase !== 0.5)
+         setColorBaseLight(0)
 
-      if (creationPhase == 3 && uColorAccent !== 0)
-         setColorAccentLightness(0.5)
+      if (creationPhase == 3 && uColorMiddle !== 0.5)
+         setColorMiddleLight(0)
 
-   }, [creationPhase, uColorBase, uColorAccent])
+      if (creationPhase == 4 && uColorTop !== 0.5)
+         setColorTopLight(0)
+
+   }, [creationPhase, uColorBase, uColorMiddle, uColorTop])
 
    useFrame((_, delta) => {
 
       sphere.current.rotation.y += delta * 0.1
+      material.current.uniforms.uTime.value = uTime.current
 
+      // Strength
       strengthCurrent.current += (uStrength - strengthCurrent.current) * delta * speedTransition
       material.current.uniforms.uStrength.value = strengthCurrent.current
 
+      // Speed
       speedCurrent.current += (uSpeed - speedCurrent.current) * delta * speedTransition
       uTime.current += speedCurrent.current * delta
 
-      material.current.uniforms.uTime.value = uTime.current
-
-      colorBaseLightnessCurrent.current += (uColorBaseLightness - colorBaseLightnessCurrent.current) * delta * speedTransition
-      material.current.uniforms.uColorBaseLightness.value = colorBaseLightnessCurrent.current
-
+      // Color Base
       colorBaseCurrent.current += (uColorBase - colorBaseCurrent.current) * delta
       material.current.uniforms.uColorBase.value = colorBaseCurrent.current
 
-      colorAccentLightnessCurrent.current += (uColorAccentLightness - colorAccentLightnessCurrent.current) * delta * speedTransition
-      material.current.uniforms.uColorAccentLightness.value = colorAccentLightnessCurrent.current
+      colorBaseLightCurrent.current += (uColorBaseLight - colorBaseLightCurrent.current) * delta * speedTransition
+      material.current.uniforms.uColorBaseLight.value = colorBaseLightCurrent.current
 
-      colorAccentCurrent.current += (uColorAccent - colorAccentCurrent.current) * delta
-      material.current.uniforms.uColorAccent.value = colorAccentCurrent.current
+      // Color Middle
+      colorMiddleCurrent.current += (uColorMiddle - colorMiddleCurrent.current) * delta
+      material.current.uniforms.uColorMiddle.value = colorMiddleCurrent.current
 
+      colorMiddleLightCurrent.current += (uColorMiddleLight - colorMiddleLightCurrent.current) * delta * speedTransition
+      material.current.uniforms.uColorMiddleLight.value = colorMiddleLightCurrent.current
+
+      // Color Top
+      colorTopCurrent.current += (uColorTop - colorTopCurrent.current) * delta
+      material.current.uniforms.uColorTop.value = colorTopCurrent.current
+
+      colorTopLightCurrent.current += (uColorTopLight - colorTopLightCurrent.current) * delta * speedTransition
+      material.current.uniforms.uColorTopLight.value = colorTopLightCurrent.current
+
+      // Roughness
       roughnessCurrent.current += (uRoughness - roughnessCurrent.current) * delta * speedTransition
       material.current.uniforms.uRoughness.value = roughnessCurrent.current
 
+      //Glow
       glowCurrent.current += (uGlow - glowCurrent.current) * delta * speedTransition
       glowNormal.current.material.opacity = glowCurrent.current
       glowAdd.current.material.opacity = glowCurrent.current
@@ -144,9 +161,11 @@ export default function Sphere() {
                uStrength: new THREE.Uniform(uStrength),
                uSpeed: new THREE.Uniform(uSpeed),
                uColorBase: new THREE.Uniform(uColorBase),
-               uColorBaseLightness: new THREE.Uniform(uColorBaseLightness),
-               uColorAccent: new THREE.Uniform(uColorAccent),
-               uColorAccentLightness: new THREE.Uniform(uColorAccentLightness),
+               uColorBaseLight: new THREE.Uniform(uColorBaseLight),
+               uColorMiddle: new THREE.Uniform(uColorMiddle),
+               uColorMiddleLight: new THREE.Uniform(uColorMiddleLight),
+               uColorTop: new THREE.Uniform(uColorTop),
+               uColorTopLight: new THREE.Uniform(uColorTopLight),
                uRoughness: new THREE.Uniform(uRoughness)
             }}
          />

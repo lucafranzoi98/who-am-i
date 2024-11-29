@@ -14,7 +14,7 @@ export default function Creation() {
          value: store.uStrength,
          min: store.uStrengthMin,
          max: store.uStrengthMax,
-         count: 5,
+         count: 4,
          function: (value) => store.setStrength(value)
       },
       {
@@ -23,7 +23,7 @@ export default function Creation() {
          value: store.uSpeed,
          min: store.uSpeedMin,
          max: store.uSpeedMax,
-         count: 5,
+         count: 4,
          function: (value) => store.setSpeed(value)
       },
       {
@@ -32,17 +32,26 @@ export default function Creation() {
          value: store.uColorBase,
          min: store.uColorBaseMin,
          max: store.uColorBaseMax,
-         count: 5,
+         count: 4,
          function: (value) => store.setColorBase(value)
       },
       {
          minText: 'Positive',
          maxText: 'Negative',
-         value: store.uColorAccent,
-         min: store.uColorAccentMin,
-         max: store.uColorAccentMax,
-         count: 5,
-         function: (value) => store.setColorAccent(value)
+         value: store.uColorMiddle,
+         min: store.uColorMiddleMin,
+         max: store.uColorMiddleMax,
+         count: 4,
+         function: (value) => store.setColorMiddle(value)
+      },
+      {
+         minText: 'Positive',
+         maxText: 'Negative',
+         value: store.uColorTop,
+         min: store.uColorTopMin,
+         max: store.uColorTopMax,
+         count: 4,
+         function: (value) => store.setColorTop(value)
       },
       {
          minText: 'Obvious',
@@ -50,7 +59,7 @@ export default function Creation() {
          value: store.uRoughness,
          min: store.uRoughnessMin,
          max: store.uRoughnessMax,
-         count: 3,
+         count: 2,
          function: (value) => store.setRoughness(value)
       },
       {
@@ -59,7 +68,7 @@ export default function Creation() {
          value: store.uGlow,
          min: store.uGlowMin,
          max: store.uGlowMax,
-         count: 3,
+         count: 2,
          function: (value) => store.setGlow(value)
       }
    ]

@@ -5,10 +5,12 @@ uniform float uTime;
 uniform float uStrength;
 uniform float uSpeed;
 uniform float uColorBase;
-uniform float uColorAccent;
+uniform float uColorBaseLight;
+uniform float uColorMiddle;
+uniform float uColorMiddleLight;
+uniform float uColorTop;
+uniform float uColorTopLight;
 uniform float uRoughness;
-uniform float uColorBaseLightness;
-uniform float uColorAccentLightness;
 
 attribute vec4 tangent;
 
@@ -42,13 +44,39 @@ void main(){
    vec3 toB = normalize(positionB - csm_Position);
    csm_Normal = cross(toA, toB);
 
-   // Color based on elevation
-   float colorMix = smoothstep(- 1.0, 1.0, elevation / uStrength);
+   vec3 color = vec3(1.0);
 
-   vec3 colorIn = hslToRgb(uColorBase, 1.0, uColorBaseLightness);
-   vec3 colorOut = hslToRgb(uColorAccent, 1.0, uColorAccentLightness);
+   // ColorBase
+   vec3 colorBaseA = vec3(1.0, 0.36, 0.0);
+   vec3 colorBaseB = vec3(0.01, 0.5, 0.44);
 
-   vColor = mix(colorIn, colorOut, colorMix);
+   vec3 colorBase = mix(colorBaseA, colorBaseB, uColorBase);
+   colorBase = mix(colorBase, vec3(1.0), uColorBaseLight);
+
+   float colorBaseMix = smoothstep(-1.0, -0.33, elevation / uStrength);
+   color = mix(colorBase, colorBase, colorBaseMix);
+
+   // ColorMiddle
+   vec3 colorMiddleA = vec3(1.0, 0.87, 0.13);
+   vec3 colorMiddleB = vec3(0.46, 0.08, 0.5);
+
+   vec3 colorMiddle = mix(colorMiddleA, colorMiddleB, uColorMiddle);
+   colorMiddle = mix(colorMiddle, vec3(1.0), uColorMiddleLight);
+
+   float colorMiddleMix = smoothstep(-0.33, 0.33, elevation / uStrength);
+   color = mix(color, colorMiddle, colorMiddleMix);
+
+   // ColorTop
+   vec3 colorTopA = vec3(0.76, 0.0, 0.06);
+   vec3 colorTopB = vec3(0.04, 0.59, 0.17);
+
+   vec3 colorTop = mix(colorTopA, colorTopB, uColorTop);
+   colorTop = mix(colorTop, vec3(1.0), uColorTopLight);
+
+   float colorTopMix = smoothstep(0.33, 1.0, elevation / uStrength);
+   color = mix(color, colorTop, colorTopMix);
+
+   vColor = color;
 
    vRoughness = uRoughness;
 }

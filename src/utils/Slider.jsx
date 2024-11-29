@@ -7,18 +7,17 @@ export default function Slider({ minText, maxText, min, max, count, handleClick,
    let texts = [
       minText,
       null,
-      'Neutral',
       null,
       maxText
    ]
 
    let sliderStyle = 'h-1 bg-neutral-500 absolute bottom-2 -z-10 '
 
-   if (count == 3) {
+   if (count == 2) {
       texts = texts.filter(val => val)
-      sliderStyle += 'w-32 md:w-40'
+      sliderStyle += 'w-32 md:w-32'
    } else {
-      sliderStyle += 'w-60 md:w-80'
+      sliderStyle += 'w-40 md:w-56'
    }
 
    const values = Array.from({ length: count }, (_, i) => {
@@ -34,9 +33,10 @@ export default function Slider({ minText, maxText, min, max, count, handleClick,
                handleClick={handleClick}
                value={val}
                key={index}
-               hasText={!(index % 2)}
+               hasText={index == 0 || index == count - 1}
                text={texts[index]}
                checked={value == val}
+               count={count}
             />
          )}
       </div>
