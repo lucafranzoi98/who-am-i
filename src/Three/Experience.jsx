@@ -1,6 +1,6 @@
 import Sphere from './Sphere'
 import useStore from '../useStore'
-import { Environment, Float } from '@react-three/drei'
+import { Environment, Float, Sparkles } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import { useFrame } from '@react-three/fiber'
@@ -48,6 +48,13 @@ export default function Experience() {
       >
         <Sphere />
       </Float>
+
+      <Sparkles
+        scale={[10, 8, 6]}
+        size={1}
+        speed={0.2}
+        count={200}
+      />
 
       {/* <Perf /> */}
     </>

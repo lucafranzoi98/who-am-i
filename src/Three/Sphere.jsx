@@ -18,10 +18,10 @@ export default function Sphere() {
    const material = useRef()
    const sphere = useRef()
 
-   const { uStrength, uSpeed, uColorBase, uColorBaseLight, uColorMiddle, uColorMiddleLight, uColorTop, uColorTopLight, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLight, setColorMiddleLight, setColorTopLight, uGlow } = useStore()
+   const { uStrength, uStrengthMin, uStrengthMax, uSpeed, uColorBase, uColorBaseLight, uColorMiddle, uColorMiddleLight, uColorTop, uColorTopLight, uRoughness, phase, introPhase, creationPhase, setStrength, setColorBaseLight, setColorMiddleLight, setColorTopLight, uGlow } = useStore()
 
-   const strengthCurrent = useRef(uStrength)
    const speedCurrent = useRef(uSpeed)
+   const strengthCurrent = useRef(uStrength)
    const colorBaseCurrent = useRef(uColorBase)
    const colorBaseLightCurrent = useRef(uColorBaseLight)
    const colorMiddleCurrent = useRef(uColorMiddle)
@@ -30,8 +30,7 @@ export default function Sphere() {
    const colorTopLightCurrent = useRef(uColorTopLight)
    const roughnessCurrent = useRef(uRoughness)
    const glowCurrent = useRef(uGlow)
-   const glowAdd = useRef()
-   const glowNormal = useRef()
+   const glow = useRef()
 
    const speedTransition = 2
 
@@ -79,7 +78,7 @@ export default function Sphere() {
          })
 
       if (introPhase == 3)
-         setStrength(0.1)
+         setStrength((uStrengthMin + uStrengthMax) / 2)
 
    }, [introPhase])
 
@@ -94,20 +93,20 @@ export default function Sphere() {
       if (creationPhase == 4 && uColorTop !== 0.5)
          setColorTopLight(0)
 
-   }, [creationPhase, uColorBase, uColorMiddle, uColorTop])
+   }, [creationPhase, uColorBase, uColorMiddle, uColorTop, ])
 
    useFrame((_, delta) => {
 
       sphere.current.rotation.y += delta * 0.1
       material.current.uniforms.uTime.value = uTime.current
 
-      // Strength
-      strengthCurrent.current += (uStrength - strengthCurrent.current) * delta * speedTransition
-      material.current.uniforms.uStrength.value = strengthCurrent.current
-
       // Speed
       speedCurrent.current += (uSpeed - speedCurrent.current) * delta * speedTransition
       uTime.current += speedCurrent.current * delta
+
+      // Strength
+      strengthCurrent.current += (uStrength - strengthCurrent.current) * delta * speedTransition
+      material.current.uniforms.uStrength.value = strengthCurrent.current
 
       // Color Base
       colorBaseCurrent.current += (uColorBase - colorBaseCurrent.current) * delta
@@ -136,8 +135,7 @@ export default function Sphere() {
 
       //Glow
       glowCurrent.current += (uGlow - glowCurrent.current) * delta * speedTransition
-      glowNormal.current.material.opacity = glowCurrent.current
-      glowAdd.current.material.opacity = glowCurrent.current
+      glow.current.material.opacity = glowCurrent.current
    })
 
    return <>
@@ -148,8 +146,8 @@ export default function Sphere() {
          geometry={geometry}
          scale={[0.02, 0.02, 0.02]}
          position-y={4.5}
-      // scale={[0.6, 0.6, 0.6]}
-      // position-y={1}
+         // scale={[0.6, 0.6, 0.6]}
+         // position-y={1}
       >
          <CustomShaderMaterial
             ref={material}
@@ -158,15 +156,15 @@ export default function Sphere() {
             fragmentShader={fragmentShader}
             uniforms={{
                uTime: new THREE.Uniform(uTime.current),
-               uStrength: new THREE.Uniform(uStrength),
                uSpeed: new THREE.Uniform(uSpeed),
+               uStrength: new THREE.Uniform(uStrength),
                uColorBase: new THREE.Uniform(uColorBase),
                uColorBaseLight: new THREE.Uniform(uColorBaseLight),
                uColorMiddle: new THREE.Uniform(uColorMiddle),
                uColorMiddleLight: new THREE.Uniform(uColorMiddleLight),
                uColorTop: new THREE.Uniform(uColorTop),
                uColorTopLight: new THREE.Uniform(uColorTopLight),
-               uRoughness: new THREE.Uniform(uRoughness)
+               uRoughness: new THREE.Uniform(uRoughness),
             }}
          />
 
@@ -174,31 +172,15 @@ export default function Sphere() {
 
       <mesh
          position-y={1}
-         ref={glowNormal}
+         ref={glow}
       >
          <sphereGeometry args={[4]} />
          <FakeGlowMaterial
             falloff={0}
-            glowInternalRadius={28}
+            glowInternalRadius={22}
             glowSharpness={0}
-            glowColor='#ffffff'
+            glowColor='#ffffee'
             opacity={uGlow}
-            blending={THREE.NormalBlending}
-         />
-      </mesh>
-
-      <mesh
-         position-y={1}
-         ref={glowAdd}
-      >
-         <sphereGeometry args={[2]} />
-         <FakeGlowMaterial
-            falloff={0}
-            glowInternalRadius={8}
-            glowSharpness={1}
-            glowColor='#ffffff'
-            opacity={uGlow}
-            blending={THREE.AdditiveBlending}
          />
       </mesh>
 

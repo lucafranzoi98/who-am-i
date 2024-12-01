@@ -10,7 +10,6 @@ import { Color, DoubleSide } from 'three'
  * @property {Number} [glowInternalRadius=6.0] - Controls the internal glow radius. Ranges from -1.0 to 1.0. Set a darker color to get the fresnel effect only.
  * @property {String} [glowColor='#00ff00'] - Specifies the color of the hologram. Use hexadecimal format.
  * @property {Number} [glowSharpness=1.0] - Specifies the edges sharpness. Defaults to 1.0.
- * @property {Number} [blending=2]
  * @property {String} [side='THREE.FrontSide'] - Specifies side for the material, as THREE.DoubleSide. Options are "THREE.FrontSide", "THREE.BackSide", "THREE.DoubleSide". Defaults to "THREE.FrontSide".
  * @property {Boolean} [depthTest=false] - Enable or disable depthTest. Defaults to false.
  * @property {Number} [opacity=1.0] - Controls the opacity. Defaults to 1.0,
@@ -26,7 +25,6 @@ const FakeGlowMaterial = ({
    glowInternalRadius = 6.0,
    glowColor = '#00ff00',
    glowSharpness = 1.0,
-   blending= 2,
    side = 'THREE.FrontSide',
    depthTest = false,
    opacity = 1.0,
@@ -90,7 +88,6 @@ const FakeGlowMaterial = ({
          side={side}
          transparent={true}
          depthTest={depthTest}
-         blending={blending}
       />
    )
 }
@@ -105,7 +102,6 @@ FakeGlowMaterial.propTypes = {
       'THREE.BackSide',
       'THREE.DoubleSide',
    ]),
-   blending: PropTypes.number
 }
 
 export default FakeGlowMaterial

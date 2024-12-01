@@ -9,45 +9,50 @@ export default function Creation() {
 
    const parameters = [
       {
-         minText: 'Passive',
-         maxText: 'Active',
-         value: store.uStrength,
-         min: store.uStrengthMin,
-         max: store.uStrengthMax,
-         count: 4,
-         function: (value) => store.setStrength(value)
-      },
-      {
-         minText: 'Calm',
-         maxText: 'Impulsive',
+         minText: 'Introvert',
+         maxText: 'Extrovert',
          value: store.uSpeed,
+         default: store.uSpeedDefault,
          min: store.uSpeedMin,
          max: store.uSpeedMax,
          count: 4,
          function: (value) => store.setSpeed(value)
       },
       {
-         minText: 'Extrovert',
-         maxText: 'Introvert',
+         minText: 'Close-minded',
+         maxText: 'Open-minded',
+         value: store.uStrength,
+         default: store.uStrengthDefault,
+         min: store.uStrengthMin,
+         max: store.uStrengthMax,
+         count: 4,
+         function: (value) => store.setStrength(value)
+      },
+      {
+         minText: 'Insecure',
+         maxText: 'Self-confident',
          value: store.uColorBase,
+         default: store.uColorBaseDefault,
          min: store.uColorBaseMin,
          max: store.uColorBaseMax,
          count: 4,
          function: (value) => store.setColorBase(value)
       },
       {
-         minText: 'Positive',
-         maxText: 'Negative',
+         minText: 'Quiet',
+         maxText: 'Energetic',
          value: store.uColorMiddle,
+         default: store.uColorMiddleDefault,
          min: store.uColorMiddleMin,
          max: store.uColorMiddleMax,
          count: 4,
          function: (value) => store.setColorMiddle(value)
       },
       {
-         minText: 'Positive',
-         maxText: 'Negative',
+         minText: 'A',
+         maxText: 'B',
          value: store.uColorTop,
+         default: store.uColorTopDefault,
          min: store.uColorTopMin,
          max: store.uColorTopMax,
          count: 4,
@@ -57,6 +62,7 @@ export default function Creation() {
          minText: 'Obvious',
          maxText: 'Mysterious',
          value: store.uRoughness,
+         default: store.uRoughnessDefault,
          min: store.uRoughnessMin,
          max: store.uRoughnessMax,
          count: 2,
@@ -64,8 +70,9 @@ export default function Creation() {
       },
       {
          minText: 'Selfish',
-         maxText: 'Selfless',
+         maxText: 'Altruistic',
          value: store.uGlow,
+         default: store.uGlowDefault,
          min: store.uGlowMin,
          max: store.uGlowMax,
          count: 2,
@@ -99,6 +106,8 @@ export default function Creation() {
          }}
          key={sliderKey}
       />
-      <Button />
+      <Button
+         isDisabled={activeValue == currentParameter.default}
+      />
    </>
 }

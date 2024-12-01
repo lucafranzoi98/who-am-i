@@ -1,20 +1,15 @@
-import { useState } from "react"
+import { useEffect } from "react"
 import useStore from "../useStore"
 
-export default function Button({ children = 'Continue', id }) {
+export default function Button({ children = 'Continue', isDisabled }) {
 
-   const { phase, introPhase, maxIntroPhase, creationPhase, maxCreationPhase, nextPhase, nextIntroPhase, nextCreationPhase, isFading, setFading, restart } = useStore()
-
-   const [isClicked, setIsClicked] = useState(false)
+   const { phase, introPhase, maxIntroPhase, creationPhase, maxCreationPhase, nextPhase, nextIntroPhase, nextCreationPhase, isFading, setFading, restart, uSpeed, uStrength, uColorBase, uColorMiddle, uColorTop, uRoughness, uGlow } = useStore()
 
    const handleClick = () => {
 
-      setIsClicked(true)
       setFading(true)
 
       setTimeout(() => {
-         setIsClicked(false)
-
          if (phase == 1 && introPhase < maxIntroPhase)
             nextIntroPhase()
          else if (phase == 2 && creationPhase < maxCreationPhase)
@@ -24,17 +19,16 @@ export default function Button({ children = 'Continue', id }) {
          else
             nextPhase()
       }, 1000)
-
+      
       setTimeout(() => {
-
          setFading(false)
       }, 1750)
    }
 
+
    return <div
-      className={`btn text-md text-center text-balance pointer-events-auto ${isClicked ? 'clicked' : 'not-clicked'}`}
+      className={`btn text-md text-center text-balance ${isDisabled && 'disabled'} ${isFading && 'pointer-events-none'}`}
       onClick={handleClick}
-      disabled={isFading}
    >
       {children}
    </div>
