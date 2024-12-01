@@ -37,7 +37,7 @@ export default function Experience() {
         opacity={opacity}
       />
 
-      <Perf />
+      {/* <Perf /> */}
     </>
   )
 }
