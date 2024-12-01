@@ -107,6 +107,7 @@ export default function Creation() {
          key={sliderKey}
       />
       <Button
+         key={sliderKey}
          isDisabled={activeValue == currentParameter.default}
       />
    </>

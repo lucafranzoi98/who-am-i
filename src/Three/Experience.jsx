@@ -1,45 +1,25 @@
 import Sphere from './Sphere'
-import useStore from '../useStore'
 import { Environment, Float, Sparkles } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
-import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
-
+import { Perf } from 'r3f-perf'
+import { useState } from 'react'
 
 export default function Experience() {
-  const { uBloom } = useStore()
-  const bloomCurrent = useRef(uBloom)
 
-  const bloomPass = useRef()
+  const [opacity, setOpacity] = useState(0)
 
-  // useFrame((_, delta) => {
-  //   bloomCurrent.current += (uBloom - bloomCurrent.current) * delta * 2
-
-  //   bloomPass.current.intensity = bloomCurrent.current
-  // })
-
+  useFrame((_, delta) => {
+    setOpacity((prev) => Math.min(prev + delta * 0.5, 1))
+  })
 
   return (
     <>
-      {/* <color args={['#2e2e2e']} attach='background' /> */}
-
       <Environment
         preset='warehouse'
         environmentIntensity={0.5}
       />
 
       <ambientLight intensity={0.2} />
-
-      {/* <EffectComposer>
-        <Bloom
-          ref={bloomPass}
-          luminanceThreshold={0}
-          intensity={bloomCurrent.current}
-          mipmapBlur
-          radius={1}
-        />
-      </EffectComposer> */}
 
       <Float
         speed={2}
@@ -53,10 +33,11 @@ export default function Experience() {
         scale={[10, 8, 6]}
         size={1}
         speed={0.2}
-        count={200}
+        count={400}
+        opacity={opacity}
       />
 
-      {/* <Perf /> */}
+      <Perf />
     </>
   )
 }
