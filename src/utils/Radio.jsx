@@ -15,7 +15,7 @@ export default function Radio({ handleClick, value, hasText, text, checked, coun
    let myLabelStyle = 'group text-neutral-100 cursor-pointer w-1 flex flex-col justify-between px-7 md:px-10 '
 
    if(count == 2) {
-      myLabelStyle += 'px-16 md:px-16'
+      myLabelStyle += 'px-20 md:px-16'
    }
     
 

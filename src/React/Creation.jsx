@@ -49,8 +49,8 @@ export default function Creation() {
          function: (value) => store.setColorMiddle(value)
       },
       {
-         minText: 'A',
-         maxText: 'B',
+         minText: 'Irrational',
+         maxText: 'Rational',
          value: store.uColorTop,
          default: store.uColorTopDefault,
          min: store.uColorTopMin,
@@ -107,7 +107,6 @@ export default function Creation() {
          key={sliderKey}
       />
       <Button
-         key={sliderKey}
          isDisabled={activeValue == currentParameter.default}
       />
    </>

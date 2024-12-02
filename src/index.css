@@ -17,7 +17,7 @@ body {
    background-color: #1e1e1e;
 }
 
-body::before{
+body::before {
    content: '';
    position: fixed;
    left: 0;
@@ -28,7 +28,7 @@ body::before{
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center;
-   mix-blend-mode:overlay;
+   mix-blend-mode: overlay;
 }
 
 #canvas-container {
@@ -40,7 +40,8 @@ body::before{
    height: 100%;
 }
 
-h1, h3 {
+h1,
+h3 {
    font-family: "Audiowide", sans-serif;
 }
 
@@ -66,15 +67,10 @@ label {
    overflow: hidden;
 }
 
-.disabled{
+.disabled {
    pointer-events: none;
    color: #555555;
    border-color: #555555;
-}
-
-.btn:hover,
-.btn:active{
-   color: #1e1e1e;
 }
 
 .btn::before {
@@ -87,12 +83,6 @@ label {
    background-color: #eeeeee;
    z-index: -1;
    transition: all 1s;
-}
-
-
-.btn:active::before,
-.btn:hover::before {
-   width: 160%;
 }
 
 .fade {
@@ -115,4 +105,18 @@ label {
 
 .radio_shadow {
    box-shadow: 0 0 6px #eeeeee;
+}
+
+@media (hover: hover) {
+
+   .btn:hover,
+   .btn:active {
+      color: #1e1e1e;
+   }
+
+   .btn:active::before,
+   .btn:hover::before {
+      width: 160%;
+   }
+
 }

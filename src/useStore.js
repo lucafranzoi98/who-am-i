@@ -28,10 +28,10 @@ const uRoughnessMax = 1
 const uRoughnessDefault = 0.3
 
 const uGlowMin = 0
-const uGlowMax = 0.2
+const uGlowMax = 0.16
 const uGlowDefault = 0.001
 
-const useStore = create((set, get) => ({
+const useStore = create((set) => ({
    phase: 0,
    nextPhase: () => set(state => ({ phase: state.phase + 1 })),
 
