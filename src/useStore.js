@@ -28,7 +28,7 @@ const uRoughnessMax = 1
 const uRoughnessDefault = 0.3
 
 const uGlowMin = 0
-const uGlowMax = 0.16
+const uGlowMax = 0.3
 const uGlowDefault = 0.001
 
 const useStore = create((set) => ({

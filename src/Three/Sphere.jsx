@@ -174,10 +174,10 @@ export default function Sphere() {
          position-y={1}
          ref={glow}
       >
-         <sphereGeometry args={[4]} />
+         <sphereGeometry args={[3]} />
          <FakeGlowMaterial
             falloff={0}
-            glowInternalRadius={22}
+            glowInternalRadius={10}
             glowSharpness={0}
             glowColor='#ffffee'
             opacity={uGlow}
