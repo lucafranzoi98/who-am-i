@@ -9,5 +9,6 @@ export default function StartScreen() {
       <Button>
          Start
       </Button>
+      <span className="absolute text-sm text-neutral-500 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap pb-1">A project by Luca Franzoi</span>
    </>
 }
