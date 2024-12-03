@@ -43,7 +43,7 @@ body::before {
 
 h1,
 h3,
-span {
+.credits {
    font-family: "Audiowide", sans-serif;
 }
 
